@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  api:
+    build:
+      dockerfile: ./Dockerfile.dev
+    env_file:
+      - .development.env
+    entrypoint: sh ./bin/docker-entrypoint.dev.sh
+
+  postgres:
+    ports:
+      - 5432:5432
+    env_file:
+      - .development.env
+
+  adminer:
+    env_file:
+      - .development.env
