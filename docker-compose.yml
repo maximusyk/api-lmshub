@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+  api:
+    container_name: coursuch
+    image: coursuch:1.0.0
+    restart: unless-stopped
+    build:
+      context: .
+      target: api
+      dockerfile: ./Dockerfile
+    entrypoint: sh ./bin/docker-entrypoint.prod.sh
+    env_file:
+      - .production.env
+    ports:
+      - $PORT:$PORT
+    networks:
+      - coursuch-network
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: coursuch_db
+    links:
+      - postgres:postgres
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  postgres:
+    image: postgres:alpine
+    container_name: coursuch_db
+    restart: always
+    networks:
+      - coursuch-network
+    env_file:
+      - .production.env
+    environment:
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
+      POSTGRES_DB: $DATABASE_NAME
+    volumes:
+      - coursuch-db:/var/lib/postgresql/data
+
+  adminer:
+    container_name: coursuch_db_adminer
+    image: adminer
+    restart: always
+    networks:
+      - coursuch-network
+    env_file:
+      - .production.env
+    ports:
+      - 8080:8080
+
+networks:
+  coursuch-network:
+    driver: bridge
+
+volumes:
+  coursuch-db:

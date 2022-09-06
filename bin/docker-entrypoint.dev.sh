@@ -1,0 +1,1 @@
+sleep 10 && npm run db:drop:docker && npm run db:create:docker && npm run db:migrate:docker && npm run db:seed:all:docker && npm run start:prod
