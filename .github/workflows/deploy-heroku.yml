@@ -13,6 +13,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "api-coursuch"
+          heroku_app_name: "api-lmshub"
           heroku_email: "22usyk08@gmail.com"
           usedocker: true

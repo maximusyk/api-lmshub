@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://svgur.com/i/jkj.svg" alt="Coursuch" border="0">
+  <img src="https://i.ibb.co/BfGPr9q/app-logo.jpg" alt="LMShub" border="0">
 </p>
 
 <br />
 
-## Coursuch Description
+## LMShub Description
 
 #
 

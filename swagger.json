@@ -1,1 +1,1308 @@
-{"openapi":"3.0.0","paths":{"/auth/google":{"post":{"operationId":"AuthController_authenticateGoogle","summary":"Login with google","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AuthGoogleTokenDto"}}}},"responses":{"201":{"description":""}},"tags":["Auth"]}},"/auth/local/signup":{"post":{"operationId":"AuthController_signupLocal","summary":"Basic sign up","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUserDto"}}}},"responses":{"200":{"description":"User successfully registered and signed in","content":{"application/json":{"schema":{"$ref":"#/components/schemas/AuthTokensDto"}}}}},"tags":["Auth"]}},"/auth/local/signin":{"post":{"operationId":"AuthController_signinLocal","summary":"Basic sign in","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SigninLocalDto"}}}},"responses":{"200":{"description":"User successfully signed in","content":{"application/json":{"schema":{"$ref":"#/components/schemas/AuthTokensDto"}}}}},"tags":["Auth"]}},"/auth/logout":{"post":{"operationId":"AuthController_logout","summary":"Logout","parameters":[],"responses":{"200":{"description":"User successfully logged out"}},"tags":["Auth"],"security":[{"bearer":[]}]}},"/auth/refresh":{"post":{"operationId":"AuthController_refreshTokens","summary":"Generate new tokens","parameters":[],"responses":{"200":{"description":"User tokens successfully refreshed","content":{"application/json":{"schema":{"$ref":"#/components/schemas/AuthTokensDto"}}}}},"tags":["Auth"],"security":[{"bearer":[]}]}},"/users":{"post":{"operationId":"UsersController_create","summary":"Create user","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUserDto"}}}},"responses":{"201":{"description":"User successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserEntityDto"}}}}},"tags":["Users"],"security":[{"bearer":[]}]},"get":{"operationId":"UsersController_findAll","summary":"Find all users","parameters":[],"responses":{"200":{"description":"Get all users","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UserEntityDto"}}}}}},"tags":["Users"],"security":[{"bearer":[]}]}},"/users/me":{"get":{"operationId":"UsersController_findCurrentUser","summary":"Get current user info","parameters":[],"responses":{"200":{"description":"Update user by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserEntityDto"}}}}},"tags":["Users"],"security":[{"bearer":[]}]},"patch":{"operationId":"UsersController_updateCurrentUser","summary":"Update current user info","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateUserDto"}}}},"responses":{"200":{"description":"Update user by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserEntityDto"}}}}},"tags":["Users"],"security":[{"bearer":[]}]}},"/users/{id}":{"get":{"operationId":"UsersController_findById","summary":"Get one user by Id","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get user by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserEntityDto"}}}}},"tags":["Users"],"security":[{"bearer":[]}]},"patch":{"operationId":"UsersController_update","summary":"Update user","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateUserDto"}}}},"responses":{"200":{"description":"Update user by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserEntityDto"}}}}},"tags":["Users"],"security":[{"bearer":[]}]},"delete":{"operationId":"UsersController_remove","summary":"Remove user","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove user by ID"}},"tags":["Users"],"security":[{"bearer":[]}]}},"/groups":{"post":{"operationId":"GroupsController_create","summary":"Create group","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateGroupDto"}}}},"responses":{"201":{"description":"Group successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GroupEntityDto"}}}}},"tags":["Groups"],"security":[{"bearer":[]}]},"get":{"operationId":"GroupsController_findAll","summary":"Get all group","parameters":[],"responses":{"200":{"description":"All groups","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/GroupEntityDto"}}}}}},"tags":["Groups"],"security":[{"bearer":[]}]}},"/groups/assign-course/{id}":{"post":{"operationId":"GroupsController_assignCourse","summary":"Assign course to group","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AssignCourseDto"}}}},"responses":{"201":{"description":"Course successfully assigned to group","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GroupEntityDto"}}}}},"tags":["Groups"],"security":[{"bearer":[]}]}},"/groups/{id}":{"get":{"operationId":"GroupsController_findOne","summary":"Get one group by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"One group by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GroupEntityDto"}}}}},"tags":["Groups"],"security":[{"bearer":[]}]},"patch":{"operationId":"GroupsController_update","summary":"Update group","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateGroupDto"}}}},"responses":{"200":{"description":"Update group by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GroupEntityDto"}}}}},"tags":["Groups"],"security":[{"bearer":[]}]},"delete":{"operationId":"GroupsController_remove","summary":"Remove group","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove group by ID"}},"tags":["Groups"],"security":[{"bearer":[]}]}},"/roles":{"post":{"operationId":"RolesController_create","summary":"Create role","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateRoleDto"}}}},"responses":{"200":{"description":"Role successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RoleEntityDto"}}}}},"tags":["Roles"],"security":[{"bearer":[]}]},"get":{"operationId":"RolesController_findAll","summary":"Get all roles","parameters":[],"responses":{"200":{"description":"Get all roles","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/RoleEntityDto"}}}}}},"tags":["Roles"],"security":[{"bearer":[]}]}},"/roles/{id}":{"get":{"operationId":"RolesController_findOne","summary":"Get one role by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get role by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RoleEntityDto"}}}}},"tags":["Roles"],"security":[{"bearer":[]}]},"patch":{"operationId":"RolesController_update","summary":"Update role","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateRoleDto"}}}},"responses":{"200":{"description":"Update role by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RoleEntityDto"}}}}},"tags":["Roles"],"security":[{"bearer":[]}]},"delete":{"operationId":"RolesController_remove","summary":"Remove role","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove role by ID"}},"tags":["Roles"],"security":[{"bearer":[]}]}},"/tokens":{"post":{"operationId":"TokensController_create","summary":"Create token","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUpdateTokenDto"}}}},"responses":{"200":{"description":"Token successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/TokenEntityDto"}}}}},"tags":["Tokens"]},"get":{"operationId":"TokensController_findAll","summary":"Get all tokens","parameters":[],"responses":{"200":{"description":"Get all tokens","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/TokenEntityDto"}}}}}},"tags":["Tokens"]}},"/tokens/{id}":{"get":{"operationId":"TokensController_findOne","summary":"Get one token by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get token by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/TokenEntityDto"}}}}},"tags":["Tokens"]},"patch":{"operationId":"TokensController_update","summary":"Update token","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUpdateTokenDto"}}}},"responses":{"200":{"description":"Update token by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/TokenEntityDto"}}}}},"tags":["Tokens"]},"delete":{"operationId":"TokensController_remove","summary":"Remove token","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove token by ID"}},"tags":["Tokens"]}},"/courses":{"post":{"operationId":"CoursesController_create","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateCourseDto"}}}},"responses":{"200":{"description":"Course successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CourseEntityDto"}}}}},"tags":["Courses"],"security":[{"bearer":[]}]},"get":{"operationId":"CoursesController_findAll","parameters":[],"responses":{"200":{"description":"Get all courses","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/CourseEntityDto"}}}}}},"tags":["Courses"],"security":[{"bearer":[]}]}},"/courses/{id}":{"get":{"operationId":"CoursesController_findOne","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get course by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CourseEntityDto"}}}}},"tags":["Courses"],"security":[{"bearer":[]}]},"patch":{"operationId":"CoursesController_update","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateCourseDto"}}}},"responses":{"200":{"description":"Update course by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CourseEntityDto"}}}}},"tags":["Courses"],"security":[{"bearer":[]}]},"delete":{"operationId":"CoursesController_remove","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove course by ID"}},"tags":["Courses"],"security":[{"bearer":[]}]}},"/chapters":{"post":{"operationId":"ChaptersController_create","summary":"Create chapter","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateChapterDto"}}}},"responses":{"201":{"description":"Chapter successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ChapterEntityDto"}}}}},"tags":["Chapters"],"security":[{"bearer":[]}]},"get":{"operationId":"ChaptersController_findAll","summary":"Get all chapters","parameters":[],"responses":{"200":{"description":"Get all chapters","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/ChapterEntityDto"}}}}}},"tags":["Chapters"],"security":[{"bearer":[]}]}},"/chapters/{id}":{"get":{"operationId":"ChaptersController_findById","summary":"Get one chapter by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get chapter by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ChapterEntityDto"}}}}},"tags":["Chapters"],"security":[{"bearer":[]}]},"patch":{"operationId":"ChaptersController_update","summary":"Update chapter","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateChapterDto"}}}},"responses":{"200":{"description":"Update chapter by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ChapterEntityDto"}}}}},"tags":["Chapters"],"security":[{"bearer":[]}]},"delete":{"operationId":"ChaptersController_remove","summary":"Remove chapter","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove chapter by ID"}},"tags":["Chapters"],"security":[{"bearer":[]}]}},"/lectures/file/{id}":{"get":{"operationId":"LecturesController_readLecture","summary":"Read lecture | Get lecture content","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"tags":["Lectures"],"security":[{"bearer":[]}]},"patch":{"operationId":"LecturesController_editLecture","summary":"Edit lecture | Edit lecture content","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"tags":["Lectures"],"security":[{"bearer":[]}]}},"/lectures":{"post":{"operationId":"LecturesController_create","summary":"Create lecture","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateLectureDto"}}}},"responses":{"201":{"description":"Lecture successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/LectureEntityDto"}}}}},"tags":["Lectures"],"security":[{"bearer":[]}]},"get":{"operationId":"LecturesController_findAll","summary":"Get all lectures","parameters":[],"responses":{"200":{"description":"Get all lectures","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/LectureEntityDto"}}}}}},"tags":["Lectures"],"security":[{"bearer":[]}]}},"/lectures/{id}":{"get":{"operationId":"LecturesController_findOne","summary":"Get one lecture by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get lecture by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/LectureEntityDto"}}}}},"tags":["Lectures"],"security":[{"bearer":[]}]},"patch":{"operationId":"LecturesController_update","summary":"Update lecture","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateLectureDto"}}}},"responses":{"200":{"description":"Update lecture by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/LectureEntityDto"}}}}},"tags":["Lectures"],"security":[{"bearer":[]}]},"delete":{"operationId":"LecturesController_remove","summary":"Remove lecture","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove lecture by ID"}},"tags":["Lectures"],"security":[{"bearer":[]}]}},"/units":{"post":{"operationId":"UnitsController_create","summary":"Create unit","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUnitDto"}}}},"responses":{"200":{"description":"Unit successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UnitEntityDto"}}}}},"tags":["Units"],"security":[{"bearer":[]}]},"get":{"operationId":"UnitsController_findAll","summary":"Find all units","parameters":[],"responses":{"200":{"description":"Get all units","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/UnitEntityDto"}}}}}},"tags":["Units"],"security":[{"bearer":[]}]}},"/units/{id}":{"get":{"operationId":"UnitsController_findByLectureId","summary":"Find units by lecture ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get unit by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UnitEntityDto"}}}}},"tags":["Units"],"security":[{"bearer":[]}]},"patch":{"operationId":"UnitsController_update","summary":"Update unit","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateUnitDto"}}}},"responses":{"200":{"description":"Update unit by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UnitEntityDto"}}}}},"tags":["Units"],"security":[{"bearer":[]}]},"delete":{"operationId":"UnitsController_remove","summary":"Remove unit","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove unit by ID"}},"tags":["Units"],"security":[{"bearer":[]}]}},"/quizzes":{"post":{"operationId":"QuizzesController_create","summary":"Create quiz","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateQuizDto"}}}},"responses":{"201":{"description":"Quiz successfully created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/QuizEntityDto"}}}}},"tags":["Quizzes"],"security":[{"bearer":[]}]},"get":{"operationId":"QuizzesController_findAll","summary":"Get all quizzes","parameters":[],"responses":{"200":{"description":"Get all quizzes","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/QuizEntityDto"}}}}}},"tags":["Quizzes"],"security":[{"bearer":[]}]}},"/quizzes/{id}":{"get":{"operationId":"QuizzesController_findOne","summary":"Get one quiz by ID","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Get quiz by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/QuizEntityDto"}}}}},"tags":["Quizzes"],"security":[{"bearer":[]}]},"patch":{"operationId":"QuizzesController_update","summary":"Update quiz","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateQuizDto"}}}},"responses":{"200":{"description":"Update quiz by ID","content":{"application/json":{"schema":{"$ref":"#/components/schemas/QuizEntityDto"}}}}},"tags":["Quizzes"],"security":[{"bearer":[]}]},"delete":{"operationId":"QuizzesController_remove","summary":"Remove quiz","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"Remove quiz by ID"}},"tags":["Quizzes"],"security":[{"bearer":[]}]}}},"info":{"title":"Coursuch API","description":"","version":"v0.1.0","contact":{}},"tags":[{"name":"Auth","description":"Auth endpoints","externalDocs":{"url":"/auth"}},{"name":"Users","description":"Users endpoints","externalDocs":{"url":"/users"}},{"name":"Groups","description":"Groups endpoints","externalDocs":{"url":"/groups"}},{"name":"Roles","description":"Roles endpoints","externalDocs":{"url":"/roles"}},{"name":"Tokens","description":"Tokens endpoints","externalDocs":{"url":"/tokens"}},{"name":"Courses","description":"Courses endpoints","externalDocs":{"url":"/courses"}},{"name":"Chapters","description":"Chapters endpoints","externalDocs":{"url":"/chapters"}},{"name":"Lectures","description":"Lectures endpoints","externalDocs":{"url":"/lectures"}},{"name":"Units","description":"Units endpoints","externalDocs":{"url":"/units"}},{"name":"Quizzes","description":"Quizzes endpoints","externalDocs":{"url":"/quizzes"}}],"servers":[{"url":"https://coursuch-lms.herokuapp.com/api","description":"Coursuch Remote"},{"url":"http://localhost:5000/api","description":"Coursuch Local"}],"components":{"securitySchemes":{"bearer":{"scheme":"bearer","bearerFormat":"JWT","type":"http"}},"schemas":{"AuthGoogleTokenDto":{"type":"object","properties":{"accessToken":{"type":"string"}},"required":["accessToken"]},"CreateUserDto":{"type":"object","properties":{"firstName":{"type":"string"},"lastName":{"type":"string"},"username":{"type":"string"},"email":{"type":"string"},"phone":{"type":"string"},"password":{"type":"string"},"hashedPassword":{"type":"string"},"roleId":{"type":"string"},"groupId":{"type":"string"},"isRegisteredByGoogle":{"type":"boolean"}},"required":["firstName","lastName","username","email","password","roleId"]},"AuthTokensDto":{"type":"object","properties":{"accessToken":{"type":"string"},"refreshToken":{"type":"string"}},"required":["accessToken","refreshToken"]},"SigninLocalDto":{"type":"object","properties":{"email":{"type":"string"},"password":{"type":"string"}},"required":["email","password"]},"RoleEntityDto":{"type":"object","properties":{}},"UserEntityDto":{"type":"object","properties":{"id":{"type":"string"},"firstName":{"type":"string"},"lastName":{"type":"string"},"username":{"type":"string"},"email":{"type":"string"},"phone":{"type":"string"},"password":{"type":"string"},"roleId":{"type":"string"},"role":{"$ref":"#/components/schemas/RoleEntityDto"},"groupId":{"type":"string"},"group":{"$ref":"#/components/schemas/GroupEntityDto"},"isRegisteredByGoogle":{"type":"boolean"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","firstName","lastName","username","email","phone","roleId","role","groupId","group","isRegisteredByGoogle","createdAt","updatedAt","deletedAt"]},"Chapter":{"type":"object","properties":{}},"UnitCohesionRateEntityDto":{"type":"object","properties":{"id":{"type":"string"},"unitId":{"type":"string"},"unit":{"$ref":"#/components/schemas/UnitEntityDto"},"cohesionUnitId":{"type":"string"},"cohesionUnit":{"$ref":"#/components/schemas/UnitEntityDto"},"cohesionRate":{"type":"number"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","unitId","unit","cohesionUnitId","cohesionUnit","cohesionRate","createdAt","updatedAt","deletedAt"]},"UnitEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"content":{"type":"string"},"cohesionRates":{"type":"array","items":{"$ref":"#/components/schemas/UnitCohesionRateEntityDto"}},"lectureId":{"type":"string"},"lecture":{"$ref":"#/components/schemas/LectureEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","content","cohesionRates","lectureId","lecture","createdAt","updatedAt","deletedAt"]},"LectureEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"fileId":{"type":"string"},"isActive":{"type":"boolean"},"chapterId":{"type":"string"},"chapter":{"$ref":"#/components/schemas/Chapter"},"units":{"type":"array","items":{"$ref":"#/components/schemas/UnitEntityDto"}},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","fileId","isActive","chapterId","chapter","units","createdAt","updatedAt","deletedAt"]},"QuizConfigEntityDto":{"type":"object","properties":{"id":{"type":"string"},"attempts":{"type":"number"},"duration":{"format":"date-time","type":"string"},"startDate":{"format":"date-time","type":"string"},"endDate":{"format":"date-time","type":"string"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","attempts","duration","startDate","endDate","createdAt","updatedAt","deletedAt"]},"QuizQuestionTypeEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string","enum":["Single Choice","Multiple Choice","Text Input"]},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","createdAt","updatedAt","deletedAt"]},"QuizAnswerEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"isCorrect":{"type":"boolean"},"quizQuestionId":{"type":"string"},"quizQuestion":{"$ref":"#/components/schemas/QuizQuestionEntityDto"},"quizId":{"type":"string"},"quiz":{"$ref":"#/components/schemas/QuizEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","isCorrect","quizQuestionId","quizQuestion","quizId","quiz","createdAt","updatedAt","deletedAt"]},"QuizQuestionEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"questionTypeId":{"type":"string"},"questionType":{"$ref":"#/components/schemas/QuizQuestionTypeEntityDto"},"answers":{"type":"array","items":{"$ref":"#/components/schemas/QuizAnswerEntityDto"}},"connectedUnits":{"type":"array","items":{"$ref":"#/components/schemas/UnitEntityDto"}},"quizId":{"type":"string"},"quiz":{"$ref":"#/components/schemas/QuizEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","questionTypeId","questionType","answers","connectedUnits","quizId","quiz","createdAt","updatedAt","deletedAt"]},"QuizResultsEntityDto":{"type":"object","properties":{"id":{"type":"string"},"score":{"type":"number"},"quizId":{"type":"string"},"quiz":{"$ref":"#/components/schemas/QuizEntityDto"},"studentId":{"type":"string"},"student":{"$ref":"#/components/schemas/UserEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","score","quizId","quiz","studentId","student","createdAt","updatedAt","deletedAt"]},"QuizEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"quizConfigId":{"type":"string"},"quizConfig":{"$ref":"#/components/schemas/QuizConfigEntityDto"},"quizQuestions":{"$ref":"#/components/schemas/QuizQuestionEntityDto"},"quizResults":{"$ref":"#/components/schemas/QuizResultsEntityDto"},"course":{"$ref":"#/components/schemas/CourseEntityDto"},"chapterId":{"type":"string"},"chapter":{"$ref":"#/components/schemas/ChapterEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","quizConfigId","quizConfig","quizQuestions","quizResults","course","chapterId","chapter","createdAt","updatedAt","deletedAt"]},"ChapterEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"lectures":{"type":"array","items":{"$ref":"#/components/schemas/LectureEntityDto"}},"quizzes":{"type":"array","items":{"$ref":"#/components/schemas/QuizEntityDto"}},"courseId":{"type":"string"},"course":{"type":"array","items":{"$ref":"#/components/schemas/CourseEntityDto"}},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","lectures","quizzes","courseId","course","createdAt","updatedAt","deletedAt"]},"CourseEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"description":{"type":"string"},"professorId":{"type":"string"},"professor":{"$ref":"#/components/schemas/UserEntityDto"},"chapters":{"type":"array","items":{"$ref":"#/components/schemas/ChapterEntityDto"}},"assignedGroups":{"type":"array","items":{"$ref":"#/components/schemas/GroupEntityDto"}},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","description","professorId","professor","chapters","assignedGroups","createdAt","updatedAt","deletedAt"]},"GroupEntityDto":{"type":"object","properties":{"id":{"type":"string"},"title":{"type":"string"},"students":{"type":"array","items":{"$ref":"#/components/schemas/UserEntityDto"}},"assignedCourses":{"type":"array","items":{"$ref":"#/components/schemas/CourseEntityDto"}},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","title","students","assignedCourses","createdAt","updatedAt","deletedAt"]},"UpdateUserDto":{"type":"object","properties":{"firstName":{"type":"string"},"lastName":{"type":"string"},"username":{"type":"string"},"email":{"type":"string"},"phone":{"type":"string"},"password":{"type":"string"},"roleId":{"type":"string"},"groupId":{"type":"string"}}},"CreateGroupDto":{"type":"object","properties":{"title":{"type":"string"}},"required":["title"]},"AssignCourseDto":{"type":"object","properties":{"courseId":{"type":"string"}},"required":["courseId"]},"UpdateGroupDto":{"type":"object","properties":{"title":{"type":"string"},"courseId":{"type":"string"},"studentIds":{"type":"array","items":{"type":"array"}}}},"CreateRoleDto":{"type":"object","properties":{}},"UpdateRoleDto":{"type":"object","properties":{}},"CreateUpdateTokenDto":{"type":"object","properties":{"refreshToken":{"type":"string"},"userId":{"type":"string"}},"required":["refreshToken","userId"]},"TokenEntityDto":{"type":"object","properties":{"id":{"type":"string"},"refreshToken":{"type":"string"},"userId":{"type":"string"},"user":{"$ref":"#/components/schemas/UserEntityDto"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string"}},"required":["id","refreshToken","userId","user","createdAt","updatedAt","deletedAt"]},"CreateCourseDto":{"type":"object","properties":{"title":{"type":"string"},"description":{"type":"string"},"professorId":{"type":"string"}},"required":["title","professorId"]},"UpdateCourseDto":{"type":"object","properties":{"title":{"type":"string"},"description":{"type":"string"},"professorId":{"type":"string"}}},"CreateChapterDto":{"type":"object","properties":{"title":{"type":"string"},"courseId":{"type":"string"}},"required":["title","courseId"]},"UpdateChapterDto":{"type":"object","properties":{"title":{"type":"string"},"courseId":{"type":"string"}}},"CreateLectureDto":{"type":"object","properties":{"title":{"type":"string"},"lectureFile":{"type":"object"},"chapterId":{"type":"string"}},"required":["title","chapterId"]},"UpdateLectureDto":{"type":"object","properties":{"title":{"type":"string"}}},"CreateUnitDto":{"type":"object","properties":{"title":{"type":"string"},"content":{"type":"string"},"lectureId":{"type":"string"}},"required":["title","content","lectureId"]},"CreateUnitCohesionRateDto":{"type":"object","properties":{"unitId":{"type":"string"},"cohesionUnitId":{"type":"string"},"cohesionRate":{"type":"number"}},"required":["cohesionUnitId","cohesionRate"]},"UpdateUnitDto":{"type":"object","properties":{"title":{"type":"string"},"content":{"type":"string"},"lectureId":{"type":"string"},"cohesionUnits":{"type":"array","items":{"required":false,"type":"array","items":{"$ref":"#/components/schemas/CreateUnitCohesionRateDto"}}}},"required":["cohesionUnits"]},"CreateQuizDto":{"type":"object","properties":{"title":{"type":"string"},"chapterId":{"type":"string"},"quiestionsFile":{"type":"object"}},"required":["title","chapterId"]},"UpdateQuizDto":{"type":"object","properties":{"title":{"type":"string"},"quizConfigId":{"type":"string"},"quizQuestionIds":{"type":"string"},"quizResultIds":{"type":"string"}}}}}}
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/google": {
+      "post": {
+        "operationId": "AuthController_authenticateGoogle",
+        "summary": "Login with google",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthGoogleTokenDto" } } }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/local/signup": {
+      "post": {
+        "operationId": "AuthController_signupLocal",
+        "summary": "Basic sign up",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateUserDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully registered and signed in",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthTokensDto" } } }
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/local/signin": {
+      "post": {
+        "operationId": "AuthController_signinLocal",
+        "summary": "Basic sign in",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/SigninLocalDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully signed in",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthTokensDto" } } }
+          }
+        },
+        "tags": ["Auth"]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "summary": "Logout",
+        "parameters": [],
+        "responses": { "200": { "description": "User successfully logged out" } },
+        "tags": ["Auth"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refreshTokens",
+        "summary": "Generate new tokens",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User tokens successfully refreshed",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthTokensDto" } } }
+          }
+        },
+        "tags": ["Auth"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "UsersController_create",
+        "summary": "Create user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateUserDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserEntityDto" } } }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "UsersController_findAll",
+        "summary": "Find all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/UserEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "UsersController_findCurrentUser",
+        "summary": "Get current user info",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Update user by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserEntityDto" } } }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "UsersController_updateCurrentUser",
+        "summary": "Update current user info",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateUserDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update user by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserEntityDto" } } }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UsersController_findById",
+        "summary": "Get one user by Id",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get user by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserEntityDto" } } }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "UsersController_update",
+        "summary": "Update user",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateUserDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update user by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserEntityDto" } } }
+          }
+        },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "UsersController_remove",
+        "summary": "Remove user",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove user by ID" } },
+        "tags": ["Users"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/groups": {
+      "post": {
+        "operationId": "GroupsController_create",
+        "summary": "Create group",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateGroupDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Group successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GroupEntityDto" } } }
+          }
+        },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "GroupsController_findAll",
+        "summary": "Get all group",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All groups",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/GroupEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/groups/assign-course/{id}": {
+      "post": {
+        "operationId": "GroupsController_assignCourse",
+        "summary": "Assign course to group",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AssignCourseDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Course successfully assigned to group",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GroupEntityDto" } } }
+          }
+        },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/groups/{id}": {
+      "get": {
+        "operationId": "GroupsController_findOne",
+        "summary": "Get one group by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "One group by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GroupEntityDto" } } }
+          }
+        },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "GroupsController_update",
+        "summary": "Update group",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateGroupDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update group by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GroupEntityDto" } } }
+          }
+        },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "GroupsController_remove",
+        "summary": "Remove group",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove group by ID" } },
+        "tags": ["Groups"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/roles": {
+      "post": {
+        "operationId": "RolesController_create",
+        "summary": "Create role",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateRoleDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Role successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RoleEntityDto" } } }
+          }
+        },
+        "tags": ["Roles"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "RolesController_findAll",
+        "summary": "Get all roles",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all roles",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/RoleEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Roles"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "operationId": "RolesController_findOne",
+        "summary": "Get one role by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get role by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RoleEntityDto" } } }
+          }
+        },
+        "tags": ["Roles"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "RolesController_update",
+        "summary": "Update role",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateRoleDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update role by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RoleEntityDto" } } }
+          }
+        },
+        "tags": ["Roles"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "RolesController_remove",
+        "summary": "Remove role",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove role by ID" } },
+        "tags": ["Roles"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/tokens": {
+      "post": {
+        "operationId": "TokensController_create",
+        "summary": "Create token",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateUpdateTokenDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Token successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokenEntityDto" } } }
+          }
+        },
+        "tags": ["Tokens"]
+      },
+      "get": {
+        "operationId": "TokensController_findAll",
+        "summary": "Get all tokens",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all tokens",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/TokenEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Tokens"]
+      }
+    },
+    "/tokens/{id}": {
+      "get": {
+        "operationId": "TokensController_findOne",
+        "summary": "Get one token by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get token by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokenEntityDto" } } }
+          }
+        },
+        "tags": ["Tokens"]
+      },
+      "patch": {
+        "operationId": "TokensController_update",
+        "summary": "Update token",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateUpdateTokenDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update token by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TokenEntityDto" } } }
+          }
+        },
+        "tags": ["Tokens"]
+      },
+      "delete": {
+        "operationId": "TokensController_remove",
+        "summary": "Remove token",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove token by ID" } },
+        "tags": ["Tokens"]
+      }
+    },
+    "/courses": {
+      "post": {
+        "operationId": "CoursesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateCourseDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Course successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CourseEntityDto" } } }
+          }
+        },
+        "tags": ["Courses"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "CoursesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all courses",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/CourseEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Courses"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "operationId": "CoursesController_findOne",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get course by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CourseEntityDto" } } }
+          }
+        },
+        "tags": ["Courses"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "CoursesController_update",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateCourseDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update course by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CourseEntityDto" } } }
+          }
+        },
+        "tags": ["Courses"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "CoursesController_remove",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove course by ID" } },
+        "tags": ["Courses"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/chapters": {
+      "post": {
+        "operationId": "ChaptersController_create",
+        "summary": "Create chapter",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateChapterDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Chapter successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChapterEntityDto" } } }
+          }
+        },
+        "tags": ["Chapters"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "ChaptersController_findAll",
+        "summary": "Get all chapters",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all chapters",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/ChapterEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Chapters"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/chapters/{id}": {
+      "get": {
+        "operationId": "ChaptersController_findById",
+        "summary": "Get one chapter by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get chapter by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChapterEntityDto" } } }
+          }
+        },
+        "tags": ["Chapters"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "ChaptersController_update",
+        "summary": "Update chapter",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateChapterDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update chapter by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChapterEntityDto" } } }
+          }
+        },
+        "tags": ["Chapters"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "ChaptersController_remove",
+        "summary": "Remove chapter",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove chapter by ID" } },
+        "tags": ["Chapters"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/lectures/file/{id}": {
+      "get": {
+        "operationId": "LecturesController_readLecture",
+        "summary": "Read lecture | Get lecture content",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "LecturesController_editLecture",
+        "summary": "Edit lecture | Edit lecture content",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/lectures": {
+      "post": {
+        "operationId": "LecturesController_create",
+        "summary": "Create lecture",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateLectureDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Lecture successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LectureEntityDto" } } }
+          }
+        },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "LecturesController_findAll",
+        "summary": "Get all lectures",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all lectures",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/LectureEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/lectures/{id}": {
+      "get": {
+        "operationId": "LecturesController_findOne",
+        "summary": "Get one lecture by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get lecture by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LectureEntityDto" } } }
+          }
+        },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "LecturesController_update",
+        "summary": "Update lecture",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateLectureDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update lecture by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LectureEntityDto" } } }
+          }
+        },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "LecturesController_remove",
+        "summary": "Remove lecture",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove lecture by ID" } },
+        "tags": ["Lectures"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/units": {
+      "post": {
+        "operationId": "UnitsController_create",
+        "summary": "Create unit",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateUnitDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Unit successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UnitEntityDto" } } }
+          }
+        },
+        "tags": ["Units"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "UnitsController_findAll",
+        "summary": "Find all units",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all units",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/UnitEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Units"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/units/{id}": {
+      "get": {
+        "operationId": "UnitsController_findByLectureId",
+        "summary": "Find units by lecture ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get unit by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UnitEntityDto" } } }
+          }
+        },
+        "tags": ["Units"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "UnitsController_update",
+        "summary": "Update unit",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateUnitDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update unit by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UnitEntityDto" } } }
+          }
+        },
+        "tags": ["Units"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "UnitsController_remove",
+        "summary": "Remove unit",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove unit by ID" } },
+        "tags": ["Units"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/quizzes": {
+      "post": {
+        "operationId": "QuizzesController_create",
+        "summary": "Create quiz",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateQuizDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "Quiz successfully created",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/QuizEntityDto" } } }
+          }
+        },
+        "tags": ["Quizzes"],
+        "security": [{ "bearer": [] }]
+      },
+      "get": {
+        "operationId": "QuizzesController_findAll",
+        "summary": "Get all quizzes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all quizzes",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/QuizEntityDto" } }
+              }
+            }
+          }
+        },
+        "tags": ["Quizzes"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/quizzes/{id}": {
+      "get": {
+        "operationId": "QuizzesController_findOne",
+        "summary": "Get one quiz by ID",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Get quiz by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/QuizEntityDto" } } }
+          }
+        },
+        "tags": ["Quizzes"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "QuizzesController_update",
+        "summary": "Update quiz",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateQuizDto" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Update quiz by ID",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/QuizEntityDto" } } }
+          }
+        },
+        "tags": ["Quizzes"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "QuizzesController_remove",
+        "summary": "Remove quiz",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Remove quiz by ID" } },
+        "tags": ["Quizzes"],
+        "security": [{ "bearer": [] }]
+      }
+    }
+  },
+  "info": { "title": "LMShub API", "description": "", "version": "v0.1.0", "contact": {} },
+  "tags": [
+    { "name": "Auth", "description": "Auth endpoints", "externalDocs": { "url": "/auth" } },
+    { "name": "Users", "description": "Users endpoints", "externalDocs": { "url": "/users" } },
+    { "name": "Groups", "description": "Groups endpoints", "externalDocs": { "url": "/groups" } },
+    { "name": "Roles", "description": "Roles endpoints", "externalDocs": { "url": "/roles" } },
+    { "name": "Tokens", "description": "Tokens endpoints", "externalDocs": { "url": "/tokens" } },
+    { "name": "Courses", "description": "Courses endpoints", "externalDocs": { "url": "/courses" } },
+    { "name": "Chapters", "description": "Chapters endpoints", "externalDocs": { "url": "/chapters" } },
+    { "name": "Lectures", "description": "Lectures endpoints", "externalDocs": { "url": "/lectures" } },
+    { "name": "Units", "description": "Units endpoints", "externalDocs": { "url": "/units" } },
+    { "name": "Quizzes", "description": "Quizzes endpoints", "externalDocs": { "url": "/quizzes" } }
+  ],
+  "servers": [
+    { "url": "https://lmshub-lms.herokuapp.com/api", "description": "LMShub Remote" },
+    { "url": "http://localhost:5000/api", "description": "LMShub Local" }
+  ],
+  "components": {
+    "securitySchemes": { "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" } },
+    "schemas": {
+      "AuthGoogleTokenDto": {
+        "type": "object",
+        "properties": { "accessToken": { "type": "string" } },
+        "required": ["accessToken"]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "password": { "type": "string" },
+          "hashedPassword": { "type": "string" },
+          "roleId": { "type": "string" },
+          "groupId": { "type": "string" },
+          "isRegisteredByGoogle": { "type": "boolean" }
+        },
+        "required": ["firstName", "lastName", "username", "email", "password", "roleId"]
+      },
+      "AuthTokensDto": {
+        "type": "object",
+        "properties": { "accessToken": { "type": "string" }, "refreshToken": { "type": "string" } },
+        "required": ["accessToken", "refreshToken"]
+      },
+      "SigninLocalDto": {
+        "type": "object",
+        "properties": { "email": { "type": "string" }, "password": { "type": "string" } },
+        "required": ["email", "password"]
+      },
+      "RoleEntityDto": { "type": "object", "properties": {} },
+      "UserEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "password": { "type": "string" },
+          "roleId": { "type": "string" },
+          "role": { "$ref": "#/components/schemas/RoleEntityDto" },
+          "groupId": { "type": "string" },
+          "group": { "$ref": "#/components/schemas/GroupEntityDto" },
+          "isRegisteredByGoogle": { "type": "boolean" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "username",
+          "email",
+          "phone",
+          "roleId",
+          "role",
+          "groupId",
+          "group",
+          "isRegisteredByGoogle",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "Chapter": { "type": "object", "properties": {} },
+      "UnitCohesionRateEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "unitId": { "type": "string" },
+          "unit": { "$ref": "#/components/schemas/UnitEntityDto" },
+          "cohesionUnitId": { "type": "string" },
+          "cohesionUnit": { "$ref": "#/components/schemas/UnitEntityDto" },
+          "cohesionRate": { "type": "number" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "unitId",
+          "unit",
+          "cohesionUnitId",
+          "cohesionUnit",
+          "cohesionRate",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "UnitEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "cohesionRates": { "type": "array", "items": { "$ref": "#/components/schemas/UnitCohesionRateEntityDto" } },
+          "lectureId": { "type": "string" },
+          "lecture": { "$ref": "#/components/schemas/LectureEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "content",
+          "cohesionRates",
+          "lectureId",
+          "lecture",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "LectureEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "fileId": { "type": "string" },
+          "isActive": { "type": "boolean" },
+          "chapterId": { "type": "string" },
+          "chapter": { "$ref": "#/components/schemas/Chapter" },
+          "units": { "type": "array", "items": { "$ref": "#/components/schemas/UnitEntityDto" } },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "fileId",
+          "isActive",
+          "chapterId",
+          "chapter",
+          "units",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "QuizConfigEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "attempts": { "type": "number" },
+          "duration": { "format": "date-time", "type": "string" },
+          "startDate": { "format": "date-time", "type": "string" },
+          "endDate": { "format": "date-time", "type": "string" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "attempts", "duration", "startDate", "endDate", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "QuizQuestionTypeEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string", "enum": ["Single Choice", "Multiple Choice", "Text Input"] },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "title", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "QuizAnswerEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "isCorrect": { "type": "boolean" },
+          "quizQuestionId": { "type": "string" },
+          "quizQuestion": { "$ref": "#/components/schemas/QuizQuestionEntityDto" },
+          "quizId": { "type": "string" },
+          "quiz": { "$ref": "#/components/schemas/QuizEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "isCorrect",
+          "quizQuestionId",
+          "quizQuestion",
+          "quizId",
+          "quiz",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "QuizQuestionEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "questionTypeId": { "type": "string" },
+          "questionType": { "$ref": "#/components/schemas/QuizQuestionTypeEntityDto" },
+          "answers": { "type": "array", "items": { "$ref": "#/components/schemas/QuizAnswerEntityDto" } },
+          "connectedUnits": { "type": "array", "items": { "$ref": "#/components/schemas/UnitEntityDto" } },
+          "quizId": { "type": "string" },
+          "quiz": { "$ref": "#/components/schemas/QuizEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "questionTypeId",
+          "questionType",
+          "answers",
+          "connectedUnits",
+          "quizId",
+          "quiz",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "QuizResultsEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "score": { "type": "number" },
+          "quizId": { "type": "string" },
+          "quiz": { "$ref": "#/components/schemas/QuizEntityDto" },
+          "studentId": { "type": "string" },
+          "student": { "$ref": "#/components/schemas/UserEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "score", "quizId", "quiz", "studentId", "student", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "QuizEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "quizConfigId": { "type": "string" },
+          "quizConfig": { "$ref": "#/components/schemas/QuizConfigEntityDto" },
+          "quizQuestions": { "$ref": "#/components/schemas/QuizQuestionEntityDto" },
+          "quizResults": { "$ref": "#/components/schemas/QuizResultsEntityDto" },
+          "course": { "$ref": "#/components/schemas/CourseEntityDto" },
+          "chapterId": { "type": "string" },
+          "chapter": { "$ref": "#/components/schemas/ChapterEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "quizConfigId",
+          "quizConfig",
+          "quizQuestions",
+          "quizResults",
+          "course",
+          "chapterId",
+          "chapter",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "ChapterEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "lectures": { "type": "array", "items": { "$ref": "#/components/schemas/LectureEntityDto" } },
+          "quizzes": { "type": "array", "items": { "$ref": "#/components/schemas/QuizEntityDto" } },
+          "courseId": { "type": "string" },
+          "course": { "type": "array", "items": { "$ref": "#/components/schemas/CourseEntityDto" } },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "title", "lectures", "quizzes", "courseId", "course", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "CourseEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "professorId": { "type": "string" },
+          "professor": { "$ref": "#/components/schemas/UserEntityDto" },
+          "chapters": { "type": "array", "items": { "$ref": "#/components/schemas/ChapterEntityDto" } },
+          "assignedGroups": { "type": "array", "items": { "$ref": "#/components/schemas/GroupEntityDto" } },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "professorId",
+          "professor",
+          "chapters",
+          "assignedGroups",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "GroupEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "students": { "type": "array", "items": { "$ref": "#/components/schemas/UserEntityDto" } },
+          "assignedCourses": { "type": "array", "items": { "$ref": "#/components/schemas/CourseEntityDto" } },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "title", "students", "assignedCourses", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "password": { "type": "string" },
+          "roleId": { "type": "string" },
+          "groupId": { "type": "string" }
+        }
+      },
+      "CreateGroupDto": { "type": "object", "properties": { "title": { "type": "string" } }, "required": ["title"] },
+      "AssignCourseDto": {
+        "type": "object",
+        "properties": { "courseId": { "type": "string" } },
+        "required": ["courseId"]
+      },
+      "UpdateGroupDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "courseId": { "type": "string" },
+          "studentIds": { "type": "array", "items": { "type": "array" } }
+        }
+      },
+      "CreateRoleDto": { "type": "object", "properties": {} },
+      "UpdateRoleDto": { "type": "object", "properties": {} },
+      "CreateUpdateTokenDto": {
+        "type": "object",
+        "properties": { "refreshToken": { "type": "string" }, "userId": { "type": "string" } },
+        "required": ["refreshToken", "userId"]
+      },
+      "TokenEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "refreshToken": { "type": "string" },
+          "userId": { "type": "string" },
+          "user": { "$ref": "#/components/schemas/UserEntityDto" },
+          "createdAt": { "format": "date-time", "type": "string" },
+          "updatedAt": { "format": "date-time", "type": "string" },
+          "deletedAt": { "format": "date-time", "type": "string" }
+        },
+        "required": ["id", "refreshToken", "userId", "user", "createdAt", "updatedAt", "deletedAt"]
+      },
+      "CreateCourseDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "professorId": { "type": "string" }
+        },
+        "required": ["title", "professorId"]
+      },
+      "UpdateCourseDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "professorId": { "type": "string" }
+        }
+      },
+      "CreateChapterDto": {
+        "type": "object",
+        "properties": { "title": { "type": "string" }, "courseId": { "type": "string" } },
+        "required": ["title", "courseId"]
+      },
+      "UpdateChapterDto": {
+        "type": "object",
+        "properties": { "title": { "type": "string" }, "courseId": { "type": "string" } }
+      },
+      "CreateLectureDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "lectureFile": { "type": "object" },
+          "chapterId": { "type": "string" }
+        },
+        "required": ["title", "chapterId"]
+      },
+      "UpdateLectureDto": { "type": "object", "properties": { "title": { "type": "string" } } },
+      "CreateUnitDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "lectureId": { "type": "string" }
+        },
+        "required": ["title", "content", "lectureId"]
+      },
+      "CreateUnitCohesionRateDto": {
+        "type": "object",
+        "properties": {
+          "unitId": { "type": "string" },
+          "cohesionUnitId": { "type": "string" },
+          "cohesionRate": { "type": "number" }
+        },
+        "required": ["cohesionUnitId", "cohesionRate"]
+      },
+      "UpdateUnitDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "lectureId": { "type": "string" },
+          "cohesionUnits": {
+            "type": "array",
+            "items": {
+              "required": false,
+              "type": "array",
+              "items": { "$ref": "#/components/schemas/CreateUnitCohesionRateDto" }
+            }
+          }
+        },
+        "required": ["cohesionUnits"]
+      },
+      "CreateQuizDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "chapterId": { "type": "string" },
+          "quiestionsFile": { "type": "object" }
+        },
+        "required": ["title", "chapterId"]
+      },
+      "UpdateQuizDto": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "quizConfigId": { "type": "string" },
+          "quizQuestionIds": { "type": "string" },
+          "quizResultIds": { "type": "string" }
+        }
+      }
+    }
+  }
+}

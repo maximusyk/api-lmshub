@@ -12,27 +12,29 @@ async function start() {
     const app = await NestFactory.create(AppModule, {
         cors: {
             origin: 'http://localhost:4200',
-            credentials: true
-        }
+            credentials: true,
+        },
     });
 
     app.useLogger(app.get(Logger));
     app.useGlobalInterceptors(new LoggerErrorInterceptor());
-    app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true, forbidNonWhitelisted: true }));
+    app.useGlobalPipes(
+        new ValidationPipe({ transform: true, whitelist: true, forbidNonWhitelisted: true }),
+    );
 
     const configService = app.get(ConfigService);
 
     config.update({
         accessKeyId: configService.get('AWS_ACCESS_KEY'),
         secretAccessKey: configService.get('AWS_SECRET_KEY'),
-        region: configService.get('AWS_REGION')
+        region: configService.get('AWS_REGION'),
     });
 
     const swaggerConfig = new DocumentBuilder()
-        .setTitle('Coursuch API')
+        .setTitle('LMShub API')
         .setVersion('v0.1.0')
-        .addServer('https://coursuch-lms.herokuapp.com/api', 'Coursuch Remote')
-        .addServer(`http://localhost:${configService.get('PORT')}/api`, 'Coursuch Local')
+        .addServer('https://api-lmshub.herokuapp.com/api', 'LMShub Remote')
+        .addServer(`http://localhost:${configService.get('PORT')}/api`, 'LMShub Local')
         .addBearerAuth()
         .addTag('Auth', 'Auth endpoints', { url: '/auth' })
         .addTag('Users', 'Users endpoints', { url: '/users' })
@@ -48,8 +50,8 @@ async function start() {
 
     const expressSwaggerCustomOptions: ExpressSwaggerCustomOptions = {
         swaggerOptions: {
-            docExpansion: 'none'
-        }
+            docExpansion: 'none',
+        },
     };
 
     const document = SwaggerModule.createDocument(app, swaggerConfig);

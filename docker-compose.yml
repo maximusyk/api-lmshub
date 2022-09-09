@@ -2,8 +2,8 @@ version: "3"
 
 services:
   api:
-    container_name: coursuch
-    image: coursuch:1.0.0
+    container_name: lmshub
+    image: lmshub:1.0.0
     restart: unless-stopped
     build:
       context: .
@@ -15,11 +15,11 @@ services:
     ports:
       - $PORT:$PORT
     networks:
-      - coursuch-network
+      - lmshub-network
     depends_on:
       - postgres
     environment:
-      DATABASE_HOST: coursuch_db
+      DATABASE_HOST: lmshub_db
     links:
       - postgres:postgres
     volumes:
@@ -28,10 +28,10 @@ services:
 
   postgres:
     image: postgres:alpine
-    container_name: coursuch_db
+    container_name: lmshub_db
     restart: always
     networks:
-      - coursuch-network
+      - lmshub-network
     env_file:
       - .production.env
     environment:
@@ -39,22 +39,22 @@ services:
       POSTGRES_PASSWORD: $DATABASE_PASSWORD
       POSTGRES_DB: $DATABASE_NAME
     volumes:
-      - coursuch-db:/var/lib/postgresql/data
+      - lmshub-db:/var/lib/postgresql/data
 
   adminer:
-    container_name: coursuch_db_adminer
+    container_name: lmshub_db_adminer
     image: adminer
     restart: always
     networks:
-      - coursuch-network
+      - lmshub-network
     env_file:
       - .production.env
     ports:
       - 8080:8080
 
 networks:
-  coursuch-network:
+  lmshub-network:
     driver: bridge
 
 volumes:
-  coursuch-db:
+  lmshub-db:
