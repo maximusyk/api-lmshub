@@ -37,6 +37,7 @@ export class CoursesService {
         try {
             let {
                 search,
+                type,
                 professorIds,
                 sortDirection = SortDirection.ASC,
                 sortField = 'createdAt',
@@ -75,6 +76,10 @@ export class CoursesService {
                 findOptions.where['search'] = {
                     [Op.iLike]: `%${search}%`,
                 };
+            }
+
+            if (type) {
+                findOptions.where['type'] = type;
             }
 
             if (professorIds?.length) {

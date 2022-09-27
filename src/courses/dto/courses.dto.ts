@@ -5,8 +5,9 @@ import { Chapter } from '../../chapters/entities/chapter.entity';
 import { ChapterEntityDto } from '../../chapters/dto/chapters.dto';
 import { Group } from '../../groups/entities/group.entity';
 import { GroupEntityDto } from '../../groups/dto/groups.dto';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from 'class-validator';
 import { SortDirection } from 'src/dto/main.dto';
+import { CourseTypesEnum } from '../enums/courses.enum';
 
 export class CourseEntityDto {
     @ApiProperty()
@@ -17,6 +18,9 @@ export class CourseEntityDto {
 
     @ApiProperty()
     description: string;
+
+    @ApiProperty()
+    type: CourseTypesEnum;
 
     @ApiProperty()
     professorId: string;
@@ -55,6 +59,10 @@ export class CreateCourseDto {
     @IsUUID(4, { message: 'Professor ID must be a valid UUID' })
     @ApiProperty()
     professorId?: string;
+
+    @IsOptional()
+    @IsEnum(CourseTypesEnum)
+    type?: CourseTypesEnum = CourseTypesEnum.DRAFT;
 }
 
 export class UpdateCourseDto {
@@ -72,6 +80,11 @@ export class UpdateCourseDto {
     @IsUUID(4, { message: 'Professor ID must be a valid UUID' })
     @ApiProperty({ required: false })
     professorId?: string;
+
+    @IsOptional()
+    @IsEnum(CourseTypesEnum)
+    @ApiProperty({ required: false, enum: CourseTypesEnum })
+    type?: CourseTypesEnum;
 }
 
 export class SearchCourseDto {
@@ -79,6 +92,11 @@ export class SearchCourseDto {
     @IsString()
     @ApiProperty({ required: false })
     search?: string;
+
+    @IsOptional()
+    @IsEnum(CourseTypesEnum)
+    @ApiProperty({ required: false, enum: CourseTypesEnum })
+    type?: CourseTypesEnum;
 
     @IsOptional()
     @IsUUID(4, { each: true })
