@@ -4,14 +4,13 @@ import { Injectable } from '@nestjs/common';
 import { RoleEnum } from '../../roles/enums/role.enum';
 
 export type JwtAccessPayload = {
-    sub: string,
-    email: string,
-    role: RoleEnum,
-}
+    sub: string;
+    email: string;
+    role: RoleEnum;
+};
 
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt-access') {
-
     constructor() {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
