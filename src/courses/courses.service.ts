@@ -6,7 +6,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from '../users/users.service';
 import { RoleEnum } from '../roles/enums/role.enum';
 import { SortDirection } from 'src/dto/main.dto';
-import { CountOptions, FindOptions, Op } from 'sequelize';
+import { CountOptions, FindOptions, IncludeOptions, Op } from 'sequelize';
 import validator from 'validator';
 
 @Injectable()
@@ -100,10 +100,12 @@ export class CoursesService {
                 };
             }
 
+            const totalCount = await this.courseRepository.count();
             const result = await this.courseRepository.findAndCountAll(findOptions);
 
             return {
-                totalCount: result?.count,
+                totalCount,
+                count: result?.count,
                 page,
                 pageSize,
                 offset,

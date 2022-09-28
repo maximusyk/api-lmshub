@@ -1,4 +1,13 @@
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+    BelongsTo,
+    BelongsToMany,
+    Column,
+    DataType,
+    ForeignKey,
+    HasMany,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 import { User } from '../../users/entities/user.entity';
 import { Chapter } from '../../chapters/entities/chapter.entity';
 import { Group } from '../../groups/entities/group.entity';
@@ -24,6 +33,9 @@ export class Course extends Model<Course> {
 
     @Column({ type: DataType.STRING })
     description: string;
+
+    @Column({ type: DataType.STRING })
+    type: string;
 
     // TODO: Implement Category Entity
     // @Column({ type: DataType.STRING, allowNull: false })
